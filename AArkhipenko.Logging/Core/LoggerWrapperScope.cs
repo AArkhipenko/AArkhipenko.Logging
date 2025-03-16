@@ -22,11 +22,11 @@ namespace AArkhipenko.Logging.Wrappers
 		{
 			if (scopeModel is null)
 			{
-				throw new ArgumentNullException(nameof(logger));
+				throw new ArgumentNullException(nameof(scopeModel));
 			}
 
 			this._logger = logger ?? throw new ArgumentNullException(nameof(logger));
-			this._scope = this._logger.BeginScope(scopeModel) ?? throw new Exception("Не создан объект логирования раздела");
+			this._scope = this._logger.BeginScope(scopeModel.ToString()) ?? throw new Exception("Не создан объект логирования раздела");
 
 			this._logger.LogInformation("Начало логирования раздела");
 		}
