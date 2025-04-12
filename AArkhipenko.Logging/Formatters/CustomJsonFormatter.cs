@@ -2,8 +2,8 @@
 using Newtonsoft.Json;
 using Serilog.Events;
 using Serilog.Formatting;
-using Serilog.Formatting.Json;
-using System;
+
+using CoreConsts = AArkhipenko.Core.Consts;
 
 namespace AArkhipenko.Logging.Formatters
 {
@@ -52,7 +52,7 @@ namespace AArkhipenko.Logging.Formatters
                             logEntry.Action += "." + property.Value.ToString();
                             break;
                         }
-                    case Consts.RequestChainId:
+                    case CoreConsts.RequestChainId:
                         {
                             if (Guid.TryParse(property.Value.ToString(), out var requestId))
                             {

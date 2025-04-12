@@ -1,10 +1,11 @@
+using AArkhipenko.Core.Logging;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AArkhipenko.Logging.Test.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class WeatherForecastController : BaseLoggerController
+public class WeatherForecastController : LoggingControllerBase
 {
     private static readonly string[] Summaries = new[]
     {

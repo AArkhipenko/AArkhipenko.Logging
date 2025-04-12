@@ -5,13 +5,8 @@ namespace AArkhipenko.Logging
     /// <summary>
     /// Константы
     /// </summary>
-    public class Consts
+    internal class Consts
     {
-        /// <summary>
-        /// Название заголовка, в котором лежит ИД цепочки запросов
-        /// </summary>
-        public const string RequestChainId = "Request-Chain-Id";
-
         /// <summary>
         /// Константы для разбора <see cref="LogEvent"/>
         /// </summary>
