@@ -1,39 +1,22 @@
+﻿using AArkhipenko.Core;
 using AArkhipenko.Logging;
-using Serilog;
-using Serilog.Enrichers.AspNetCore.HttpContext;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services.AddControllers();
+// Добавление логирования в консоль
 builder.Logging.AddConsoleLogging();
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-
+// Использование прослойки, которая добавляет ИД запроса в заголоки запроса
+app.UseRequestChainMiddleware();
+// Использование прослойки, которая обогащает логирование доп информацией
+app.UseLoggingMiddleware();
 app.UseAuthorization();
 
 app.MapControllers();
-
-app.Use(async (context, next) =>
-{
-    // ���������� � ��������� ������� RequestId, ���� ��� ���
-    if (!context.Request.Headers.TryGetValue(Consts.RequestChainId, out var requestId))
-    {
-        context.Request.Headers.Add(Consts.RequestChainId, Guid.NewGuid().ToString());
-    }
-    // ������ ��������� �������, ���� ��� �� ����
-    else if (!Guid.TryParse(requestId, out var requestId1))
-    {
-        context.Request.Headers.Remove(Consts.RequestChainId);
-        context.Request.Headers.Add(Consts.RequestChainId, Guid.NewGuid().ToString());
-    }
-
-    await next.Invoke();
-});
-
-app.UseLoggingMiddleware();
 
 app.Run();
