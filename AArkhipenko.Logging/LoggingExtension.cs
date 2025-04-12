@@ -9,6 +9,8 @@ using Serilog.Settings.Configuration;
 using Serilog.Enrichers.AspNetCore.HttpContext;
 using Serilog.Core.Enrichers;
 
+using CoreConsts = AArkhipenko.Core.Consts;
+
 namespace AArkhipenko.Logging
 {
     /// <summary>
@@ -101,14 +103,14 @@ namespace AArkhipenko.Logging
                 options.EnrichersForContextFactory = (context) =>
                 {
                     var parsedRequestId = Guid.Empty;
-                    if (context.Request.Headers.TryGetValue(Consts.RequestChainId, out var requestIdStr))
+                    if (context.Request.Headers.TryGetValue(CoreConsts.RequestChainId, out var requestIdStr))
                     {
                         Guid.TryParse(requestIdStr, out parsedRequestId);
                     }
 
                     return new[]
                     {
-                        new PropertyEnricher(Consts.RequestChainId, parsedRequestId),
+                        new PropertyEnricher(CoreConsts.RequestChainId, parsedRequestId),
                         new PropertyEnricher(Consts.LogEventConsts.Method, context.Request.Method),
                         new PropertyEnricher(Consts.LogEventConsts.Path, context.Request.Path)
                     };
