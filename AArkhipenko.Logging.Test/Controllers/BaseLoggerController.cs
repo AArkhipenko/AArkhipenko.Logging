@@ -1,5 +1,5 @@
-﻿using AArkhipenko.Logging.Models;
-using AArkhipenko.Logging.Wrappers;
+﻿using AArkhipenko.Core.Logging;
+using AArkhipenko.Core.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Runtime.CompilerServices;
 
