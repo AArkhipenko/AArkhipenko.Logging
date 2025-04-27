@@ -6,7 +6,7 @@
 		<Nullable>enable</Nullable>
 		<Title>AArkhipenko.Logging</Title>
 		<PackageId>AArkhipenko.Logging</PackageId>
-		<Version>0.1.2</Version>
+		<Version>0.2.1</Version>
 		<Authors>Arkhipenko Aleksey</Authors>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<PackageLicenseFile>LICENSE</PackageLicenseFile>
