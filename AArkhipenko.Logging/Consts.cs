@@ -15,27 +15,27 @@ namespace AArkhipenko.Logging
             /// <summary>
             /// Название заголовка, в котором лежит ИД цепочки запросов
             /// </summary>
-            internal const string Method = "Method";
+            internal static string Method => "Method";
 
             /// <summary>
             /// Название заголовка, в котором лежит ИД цепочки запросов
             /// </summary>
-            internal const string Path = "Path";
+            internal static string Path => "Path";
 
             /// <summary>
             /// Разделы логирования
             /// </summary>
-            internal const string Scope = "Scope";
+            internal static string Scope => "Scope";
 
             /// <summary>
             /// Названием метода, из которого вызов
             /// </summary>
-            internal const string MethodName = "MethodName";
+            internal static string MethodName => "MethodName";
 
             /// <summary>
             /// Названием класса, из которого вызов
             /// </summary>
-            internal const string ClassName = "ClassName";
+            internal static string ClassName => "ClassName";
         }
     }
 }

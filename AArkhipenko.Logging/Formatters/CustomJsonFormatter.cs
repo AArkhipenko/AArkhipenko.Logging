@@ -32,54 +32,45 @@ namespace AArkhipenko.Logging.Formatters
 
             foreach (var property in @event.Properties)
             {
-                switch (property.Key)
+                if (property.Key == Consts.LogEventConsts.ClassName)
                 {
-                    case Consts.LogEventConsts.ClassName:
-                        {
-                            if (logEntry.Action is null)
-                            {
-                                logEntry.Action = string.Empty;
-                            }
-                            logEntry.Action = property.Value.ToString() + logEntry.Action;
-                            break;
-                        }
-                    case Consts.LogEventConsts.MethodName:
-                        {
-                            if(logEntry.Action is null)
-                            {
-                                logEntry.Action = string.Empty;
-                            }
-                            logEntry.Action += "." + property.Value.ToString();
-                            break;
-                        }
-                    case CoreConsts.RequestChainId:
-                        {
-                            if (Guid.TryParse(property.Value.ToString(), out var requestId))
-                            {
-                                logEntry.RequestId = requestId;
-                            }
-                            break;
-                        }
-                    case Consts.LogEventConsts.Method:
-                        {
-                            logEntry.Method = property.Value.ToString();
-                            break;
-                        }
-                    case Consts.LogEventConsts.Path:
-                        {
-                            logEntry.Path = property.Value.ToString();
-                            break;
-                        }
-                    case Consts.LogEventConsts.Scope:
-                        {
-                            if (property.Value is SequenceValue)
-                            {
-                                var elements = (property.Value as SequenceValue).Elements;
-                                var scopes = elements.Select(x => (x as ScalarValue).Value);
-                                logEntry.Scope = string.Join(" -> ", scopes);
-                            }
-                            break;
-                        }
+                    if (logEntry.Action is null)
+                    {
+                        logEntry.Action = string.Empty;
+                    }
+                    logEntry.Action = property.Value.ToString() + logEntry.Action;
+                }
+                else if (property.Key == Consts.LogEventConsts.MethodName)
+                {
+                    if (logEntry.Action is null)
+                    {
+                        logEntry.Action = string.Empty;
+                    }
+                    logEntry.Action += "." + property.Value.ToString();
+                }
+                else if (property.Key == CoreConsts.RequestChainId)
+                {
+                    if (Guid.TryParse(property.Value.ToString(), out var requestId))
+                    {
+                        logEntry.RequestId = requestId;
+                    }
+                }
+                else if (property.Key == Consts.LogEventConsts.Method)
+                {
+                    logEntry.Method = property.Value.ToString();
+                }
+                else if (property.Key == Consts.LogEventConsts.Path)
+                {
+                    logEntry.Path = property.Value.ToString();
+                }
+                else if (property.Key == Consts.LogEventConsts.Scope)
+                {
+                    if (property.Value is SequenceValue)
+                    {
+                        var elements = (property.Value as SequenceValue).Elements;
+                        var scopes = elements.Select(x => (x as ScalarValue).Value);
+                        logEntry.Scope = string.Join(" -> ", scopes);
+                    }
                 }
             }
 
